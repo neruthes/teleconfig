@@ -1,4 +1,3 @@
-
 import { Teleconfig } from "../src/index.mjs";
 
 export const myDaemon = Teleconfig.createDaemon({
@@ -11,33 +10,16 @@ export const myDaemon = Teleconfig.createDaemon({
     APP_NAME: "My App",
     EXTRA_SETTINGS: {
       maintenance: false,
-      allowed_ips: []
-    }
-  }
+      allowed_ips: [],
+    },
+  },
 });
 
 myDaemon.listen("0.0.0.0:9080");
 
-// Read
-console.log(myDaemon.get("MAX_UPLOAD_MB_PER_USER_DAY"));
-
-// Read snapshot
-console.log(myDaemon.getDict());
-
-// Modify
-myDaemon.set("MAX_UPLOAD_MB_PER_USER_DAY", 120);
-
-// Batch modify
-myDaemon.setDict({
-  ENABLE_REGISTRATION: false,
-  APP_NAME: "My New App"
-});
-
-// Persist
-await myDaemon.sync();
-
 // Listen for changes
-myDaemon.on("change", (key, value) => {
+myDaemon.on("change", async (key, value) => {
+  await myDaemon.sync();
   console.log("Changed:", key, value);
 });
 
