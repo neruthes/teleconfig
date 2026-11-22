@@ -23,7 +23,7 @@ npm install teleconfig
 
 ## Quick Start
 
-```
+```js
 import { Teleconfig } from "teleconfig";
 
 const config = Teleconfig.createDaemon({
@@ -75,7 +75,7 @@ Open `http://127.0.0.1:9080/` to access the built-in management UI. Enter your b
 
 ## Change Events
 
-```
+```js
 config.on("change", (key, value) => {
   console.log("Configuration changed:", key, value);
 });
@@ -99,7 +99,7 @@ API requests require a Bearer token. POST requests accept JSON objects; omitted 
 
 Non-Node.js applications can simply read the JSON cache file:
 
-```
+```python
 import json
 
 with open("../rt_conf_cache.json") as f:
